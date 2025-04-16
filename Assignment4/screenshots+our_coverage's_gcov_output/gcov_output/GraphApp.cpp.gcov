@@ -1,0 +1,109 @@
+        -:    0:Source:GraphApp.cpp
+        -:    1:#include "GraphBuilder.hpp"
+        -:    2:#include "Dijkstra.hpp"
+        -:    3:#include <iostream>
+        -:    4:#include <string>
+        -:    5:#include <sstream>
+        -:    6:#include <limits>
+        -:    7:#include <climits>
+        -:    8:using namespace std;
+        -:    9:
+        7:   10:int main() {
+        7:   11:    int x = 0;
+        -:   12:
+        -:   13:    while (true) {
+       15:   14:        string input;
+       15:   15:        cout << "Do you want to check a new graph? (y/n): ";
+       15:   16:        getline(cin, input);
+        -:   17:
+       15:   18:        if (input.length() != 1) {
+        3:   19:            x++;
+        3:   20:            cerr << "Invalid input. Please enter a single character: 'y' or 'n'." << endl;
+        3:   21:            if (x == 3) {
+        1:   22:                cerr << "You have entered invalid input 3 times. Exiting the program." << endl;
+        1:   23:                break;
+        -:   24:            }
+        2:   25:            continue;
+        -:   26:        }
+        -:   27:
+       12:   28:        char choice = input[0];
+        -:   29:
+       12:   30:        if (choice == 'n' || choice == 'N') {
+        3:   31:            cout << "Exiting program. Goodbye!" << endl;
+        3:   32:            break;
+        9:   33:        } else if (choice == 'y' || choice == 'Y') {
+        6:   34:            x = 0;
+        -:   35:            int V;
+        -:   36:
+        -:   37:            while (true) {
+       12:   38:				if (x == 3) {
+        2:   39:					cerr << "You have entered invalid input 3 times. Exiting the program." << endl;
+        2:   40:					break;
+        -:   41:				}
+       10:   42:                cout << "Enter number of vertices (positive integer): ";
+       10:   43:                string line;
+       10:   44:                getline(cin, line);
+       10:   45:                stringstream ss(line);
+        -:   46:				
+        -:   47:				
+       10:   48:                if (!(ss >> V) || (ss.peek() != EOF) || V <= 0) {
+        6:   49:					x++;
+        6:   50:                    cerr << "Invalid input. Please enter a single positive integer with no extra characters." << endl;
+        -:   51:					
+        -:   52:                } else {
+        4:   53:                    break;
+        -:   54:                }
+       20:   55:            }
+        6:   56:			if (x == 3) {
+        2:   57:				break;
+        -:   58:			}
+        4:   59:			x=0;
+        -:   60:
+        4:   61:            auto adj = GraphBuilder::constructAdj(V , x);
+        -:   62:
+        -:   63:            int src;
+        -:   64:            while (true) {
+        5:   65:				if (x == 3) {
+        2:   66:					break;
+        -:   67:				}
+        -:   68:			
+        3:   69:				cout << "Enter source vertex (0 to " << V - 1 << "): ";
+        3:   70:				cin >> src;
+        -:   71:			
+        3:   72:				if (cin.fail() || src < 0 || src >= V) {
+        1:   73:					x++;
+        1:   74:					cerr << "Invalid input. Please enter a number between 0 and " << V - 1 << "." << endl;
+        1:   75:					cin.clear();
+        1:   76:					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        -:   77:				} else {
+        2:   78:					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        2:   79:					x = 0;  // קלט תקין → איפוס
+        2:   80:					break;
+        -:   81:				}
+        -:   82:			}
+        4:   83:			if (x != 3) {
+        -:   84:				
+        -:   85:			
+        -:   86:
+        2:   87:            vector<int> distances = Dijkstra::run(V, adj, src);
+        -:   88:
+        2:   89:            cout << "Shortest distances from vertex " << src << ":\n";
+       10:   90:            for (int i = 0; i < V; ++i) {
+        8:   91:                if (distances[i] == INT_MAX)
+        2:   92:                    cout << "To " << i << ": INF\n";
+        -:   93:                else
+        6:   94:                   cout << "To " << i << ": " << distances[i] << "\n";
+        2:   95:            }x=0;
+        2:   96:		 }
+        8:   97:        } else {
+        3:   98:            x++;
+        3:   99:            cerr << "Invalid input. Please enter 'y' or 'n'." << endl;
+        3:  100:            if (x == 3) {
+        1:  101:                cerr << "You have entered invalid input 3 times. Exiting the program." << endl;
+        1:  102:                break;
+        -:  103:            }
+        -:  104:        }
+       23:  105:    }
+        -:  106:
+        7:  107:    return 0;
+        -:  108:}

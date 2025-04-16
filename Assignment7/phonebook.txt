@@ -1,0 +1,51 @@
+Avner Harishon,03-1234568
+Nezer Zaidenberg,054-5531415
+Sheva Bat,054-1234567
+Avner Shalom Harishon,03-1234569
+Eli Cohen,054-9876543
+Yael Levy,054-1112223
+David Ben,03-9876544
+Sarah Amir,054-5551234
+Ronit Mizrachi,054-3219876
+Avi Rosen,054-7891234
+Dvora Shalev,03-4567891
+Gilad Katz,054-2345678
+Miriam Eliyahu,054-8765432
+Yoav Barak,03-3344556
+Tali Green,054-5556667
+Itai Mandel,054-4445556
+Rachel Friedman,03-1230987
+Oren BenDavid,054-9090909
+Liraz Cohen,054-1010101
+Noam Stein,03-2020202
+Hadar Goldberg,054-2121212
+Moshe Azulay,054-3131313
+Ruth Levi,03-4141414
+Isaac Kaplan,054-5151515
+Hila Bar,054-6161616
+Ronen Ashkenazi,03-7171717
+Dana Shapiro,054-8181818
+Eitan Golan,054-9191919
+Lior Adler,03-1212121
+Matan Rosenfeld,054-2222222
+Noga Weiss,054-3232323
+Yaakov Paz,03-4343434
+Orit Lev,054-5454545
+Shai Manor,054-6565656
+Carmel Azoulay,03-7676767
+Amit Berman,054-8787878
+Gal Ougi Mimon,054-9898989
+Shiri Dayan,03-1010102
+Roni Tzur,054-1122334
+Michal Peretz,054-2233445
+Daniel Or,03-3344557
+Eden Cohen,054-4455667
+Tova Shaked,054-5566778
+Udi Malka,03-6677889
+Keren Arieli,054-7788990
+Oren Adler,054-8899001
+Michal Levi,03-9900112
+Amitai Feldman,054-1100223
+Gali Berger,054-2200334
+DAD,052-0000001
+MAM,052-0000002

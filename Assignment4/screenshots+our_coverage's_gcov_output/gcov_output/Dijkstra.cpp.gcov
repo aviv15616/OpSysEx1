@@ -1,0 +1,30 @@
+        -:    0:Source:Dijkstra.cpp
+        -:    1:#include "Dijkstra.hpp"
+        -:    2:#include <queue>
+        -:    3:#include <climits>
+        -:    4:
+        -:    5:
+        2:    6:vector<int> Dijkstra::run(int V, const vector<vector<vector<int>>> &adj, int src) {
+        2:    7:    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+        2:    8:    vector<int> dist(V, INT_MAX);
+        -:    9:
+        2:   10:    dist[src] = 0;
+        4:   11:    pq.push({0, src});
+        -:   12:
+        8:   13:    while (!pq.empty()) {
+        6:   14:        int u = pq.top()[1];
+        6:   15:        pq.pop();
+        -:   16:
+       14:   17:        for (const auto &x : adj[u]) {
+        8:   18:            int v = x[0];
+        8:   19:            int weight = x[1];
+        -:   20:
+        8:   21:            if (dist[v] > dist[u] + weight) {
+        4:   22:                dist[v] = dist[u] + weight;
+       12:   23:                pq.push({dist[v], v});
+        -:   24:            }
+        -:   25:        }
+        -:   26:    }
+        -:   27:
+        4:   28:    return dist;
+        2:   29:}

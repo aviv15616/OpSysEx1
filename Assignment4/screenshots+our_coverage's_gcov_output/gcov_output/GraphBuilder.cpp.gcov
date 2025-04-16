@@ -1,0 +1,94 @@
+        -:    0:Source:GraphBuilder.cpp
+        -:    1:#include "GraphBuilder.hpp"
+        -:    2:#include <iostream>
+        -:    3:#include <sstream>
+        -:    4:
+        -:    5:	
+        4:    6:vector<vector<vector<int>>> GraphBuilder::constructAdj(int V , int& x) {
+        8:    7:    vector<vector<vector<int>>> adj(V);
+        -:    8:
+        -:    9:    while (true) {
+       17:   10:        cout << "Enter an edge (format: u v weight) or -1 -1 -1 to stop: ";
+       17:   11:        string line;
+       17:   12:        getline(cin, line);
+        -:   13:
+       17:   14:        istringstream iss(line);
+        -:   15:        int u, v, weight;
+        -:   16:
+       17:   17:        if (!(iss >> u >> v >> weight) || !iss.eof()) {
+        -:   18:            
+        3:   19:            cerr << "Invalid input! Please enter exactly three integers separated by spaces." << endl;
+        3:   20:			x++;
+        3:   21:            if (x == 3) {
+        1:   22:                cerr << "Too many invalid attempts. Returning to main menu." << endl;
+        1:   23:                break;
+        -:   24:            }
+        2:   25:            continue;
+        -:   26:        }
+        -:   27:
+        -:   28:       
+        -:   29:
+       14:   30:        if (u == -1 && v == -1 && weight == -1) {
+        2:   31:            break;
+        -:   32:        }
+        -:   33:
+       12:   34:        if (u < 0 || u >= V || v < 0 || v >= V) {
+        -:   35:            
+        4:   36:            cerr << "Error: Vertex index out of range! Must be between 0 and " << V - 1 << "." << endl;
+        4:   37:			x++;
+        4:   38:            if (x == 3) {
+        1:   39:                cerr << "Too many invalid attempts. Returning to main menu." << endl;
+        1:   40:                break;
+        -:   41:            }
+        3:   42:            continue;
+        -:   43:        }
+        -:   44:
+        8:   45:        if (u == v) {
+        -:   46:            
+        1:   47:            cerr << "Error: Self-loops are not allowed (u != v)." << endl;
+        -:   48:            
+        1:   49:            continue;
+        -:   50:        }
+        -:   51:
+        7:   52:        if (weight < 0) {
+        -:   53:            
+        1:   54:            cerr << "Error: Dijkstra does not support negative weights." << endl;
+        -:   55:            
+        1:   56:            continue;
+        -:   57:        }
+        -:   58:
+        6:   59:        bool edgeExists = false;
+        8:   60:        for (auto& neighbor : adj[u]) {
+        4:   61:            if (neighbor[0] == v) {
+        2:   62:                edgeExists = true;
+        2:   63:                cout << "Edge between " << u << " and " << v << " already exists with weight " << neighbor[1] << "." << endl;
+        2:   64:                cout << "Do you want to update it to weight " << weight << "? (y/n): ";
+        -:   65:
+        2:   66:                string response;
+        2:   67:                getline(cin, response);
+        -:   68:
+        2:   69:                if (response == "y" || response == "Y") {
+        1:   70:                    neighbor[1] = weight;
+       1*:   71:                    for (auto& reverseNeighbor : adj[v]) {
+        1:   72:                        if (reverseNeighbor[0] == u) {
+        1:   73:                            reverseNeighbor[1] = weight;
+        1:   74:                            break;
+        -:   75:                        }
+        -:   76:                    }
+        1:   77:                    cout << "Edge updated." << endl;
+        -:   78:                } else {
+        1:   79:                    cout << "Edge not updated." << endl;
+        -:   80:                }
+        -:   81:
+        2:   82:                break;
+        2:   83:            }
+        -:   84:        }
+        -:   85:
+        6:   86:        if (!edgeExists) {
+        8:   87:            adj[u].push_back({v, weight});
+        8:   88:            adj[v].push_back({u, weight});
+        4:   89:			x=0;
+        -:   90:        }
+       41:   91:    }
+        -:   92:
+        4:   93:    return adj;}
