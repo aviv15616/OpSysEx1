@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
     // קלט מהשורה: real imag [N]
     double real = atof(argv[1]);
     double imag = atof(argv[2]);
-    int N = (argc >= 4) ? atoi(argv[3]) : 1000; // ברירת מחדל ל־100 איטרציות
+    int N = (argc >= 4) ? atoi(argv[3]) : 1000; // ברירת מחדל ל־1000 איטרציות
 
     // יוצרים את המספר המרוכב c
     double complex c = real + imag * I;

@@ -1,17 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <complex.h>
+#include <string.h>
 #include "mandelbrot.h"
+
+#define BUFFER_SIZE 100
 
 int main() {
     double real, imag;
+    char buffer[BUFFER_SIZE];
 
     while (1) {
         printf("Enter real and imaginary parts: ");
-        if (scanf("%lf %lf", &real, &imag) != 2) {
-            fprintf(stderr, "Usage: Enter two real numbers (e.g., -1.627 -0.001)\n");
+        if (!fgets(buffer, sizeof(buffer), stdin)) {
+            fprintf(stderr, "Input error.\n");
             break;
-        }        
+        }
+
+        // ננסה לקרוא בדיוק שני מספרים ובודקים שאין עוד זבל אחריהם
+        char extra;
+        int num_read = sscanf(buffer, "%lf %lf %c", &real, &imag, &extra);
+
+        if (num_read == EOF) {
+            fprintf(stderr, "Input error.\n");
+            break;
+        }
+        
+        if (num_read != 2) {
+            fprintf(stderr, "Usage: Enter two real numbers (e.g., -1.627 -0.001)\n");
+            continue; // במקום לעצור, פשוט לבקש קלט מחדש
+        }
 
         // תנאי יציאה: 0 0
         if (real == 0 && imag == 0) {

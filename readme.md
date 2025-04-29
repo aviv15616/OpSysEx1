@@ -138,6 +138,11 @@ make run
 make
 ```
 
+### How to run:
+```bash
+./prog <rand seed> <array size>
+```
+
 ### How to profile:
 ```bash
 ./prog <rand seed> <array size>
